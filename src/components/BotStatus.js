@@ -2,21 +2,10 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { useSurferBot } from '../context/SurferBotContext';
 import { FaCircleXmark } from "react-icons/fa6";
 import { IoSettingsOutline } from "react-icons/io5";
-import {
-  Table,
-  TableHeader,
-  TableBody,
-  TableColumn,
-  TableRow,
-  TableCell,
-  Pagination,
-  Button
-} from "@nextui-org/react";
-
+import { Table, TableHeader, TableBody, TableColumn, TableRow, TableCell, Pagination, Button } from "@nextui-org/react";
 import { useModal } from '../context/ModalContext';
 
-
-const BotStatusTable = () => {
+const BotStatus = () => {
   const { api } = useSurferBot();
   const [page, setPage] = useState(1);
   const rowsPerPage = 15;
@@ -40,7 +29,7 @@ const BotStatusTable = () => {
       }
     };
 
-    const interval = setInterval(fetchData, 1000);
+    const interval = setInterval(fetchData, 250);
     return () => clearInterval(interval);
   }, [api, page]);
 
@@ -50,6 +39,7 @@ const BotStatusTable = () => {
     { name: "World", uid: "World" },
     { name: "Actions", uid: "Actions" },
   ];
+
   const renderCell = useCallback((botData, columnKey) => {
     const columnMap = {
       "Name": botData.detail.showGrowid + " ["+ botData.detail.ms +"]",
@@ -78,13 +68,11 @@ const BotStatusTable = () => {
 
   return (
     <div className="flex flex-col w-full max-w-[1024px] mx-auto">
-
       <div className="flex justify-end ">
         <Button size="md" className="px-4 py-1 m-4" onPress={() =>  openModal('AddBot')}>
           Add Bot
         </Button>
       </div>
-
 
       <Table
         aria-label="Example static collection table"
@@ -126,4 +114,4 @@ const BotStatusTable = () => {
   );
 };
 
-export default BotStatusTable;
+export default BotStatus;
