@@ -7,6 +7,8 @@ import RotationService from './RotationService';
 import WorldService from './WorldService ';
 import SwitchService from './SwitchService';
 import SettingsService from './SettingsService';
+import FileService from './FileService';
+
 class SurferBotAPI {
   constructor(baseURL, password) {
     this.axiosInstance = axios.create({
@@ -26,6 +28,7 @@ class SurferBotAPI {
     this.settingsService  = new SettingsService(this.axiosInstance);
     this.switchService = new SwitchService(this.axiosInstance);
     this.worldService = new WorldService(this.axiosInstance);
+    this.FileService = new FileService(this.axiosInstance);
   }
 }
 
